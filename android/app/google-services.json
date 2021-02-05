@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1006325728842",
+    "project_id": "daisy-dba79",
+    "storage_bucket": "daisy-dba79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006325728842:android:112ddc187256bab16648b3",
+        "android_client_info": {
+          "package_name": "com.smnway.daisy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1006325728842-bilnj339ikkh3tvap1u13jth787e7e3g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smnway.daisy",
+            "certificate_hash": "c0e75fcc9bf6aac19c5c4cb98d81458e7c469679"
+          }
+        },
+        {
+          "client_id": "1006325728842-os0ssr3839tg6aihaqrv8j9n1b14tamv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_98vPTz06HWj-h9NuEnsu3WTZkS8IQk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1006325728842-os0ssr3839tg6aihaqrv8j9n1b14tamv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
