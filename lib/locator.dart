@@ -1,13 +1,13 @@
-import 'package:daisy/repository/user_repository.dart';
-import 'package:daisy/sevices/fake_autotantication.dart';
-import 'package:daisy/sevices/firebase_auth_services.dart';
-import 'package:daisy/sevices/firestore_db_services.dart';
+import 'features/auth/data/datasources/firebase_auth_services.dart';
+import 'features/auth/data/datasources/firestore_db_services.dart';
+import 'file:///C:/Users/serife/Desktop/Daisy-Flutter/lib/features/auth/data/repositories/auth_repository_impl.dart';
+import 'file:///C:/Users/serife/Desktop/Daisy-Flutter/lib/features/auth/data/datasources/fake_autotantication.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt locator=GetIt.instance;
 void setupLocator(){
 locator.registerLazySingleton(() => FirebaseAuthService());
 locator.registerLazySingleton(() => FakeAutanticationService());
-locator.registerLazySingleton(() => UserRepository());
+locator.registerLazySingleton(() => AuthRepository());
 locator.registerLazySingleton(() => FireStoreDBServices());
 }
