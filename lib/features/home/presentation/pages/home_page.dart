@@ -1,4 +1,5 @@
 import 'file:///C:/Users/serife/Desktop/Daisy-Flutter/lib/features/home/presentation/widgets/weekly_calendar.dart';
+import 'package:daisy/features/home/presentation/pages/about_us.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,13 +12,24 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(floatingActionButton: Column(mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        FloatingActionButton(child: Icon(Icons.add_comment,color: Colors.purple,size: 34,),backgroundColor: Colors.white,onPressed: (){},),
-        SizedBox(height: 60,),
-
-      ],
-    ),
+    return Scaffold(
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            child: Icon(
+              Icons.add_comment,
+              color: Colors.purple,
+              size: 34,
+            ),
+            backgroundColor: Colors.white,
+            onPressed: () {},
+          ),
+          SizedBox(
+            height: 60,
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -29,7 +41,14 @@ class _HomePageState extends State<HomePage> {
                   IconButton(
                     icon: Icon(Icons.dehaze_rounded),
                     color: Colors.purple,
-                    onPressed: () {},
+                    onPressed: () {
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AboutUs()),
+                      );
+
+                    },
                   ),
                   Row(
                     children: [
@@ -49,7 +68,6 @@ class _HomePageState extends State<HomePage> {
               Container(
                 child: WeeklyCalendar(),
               ),
-
               Container(
                   height: 320,
                   child: Padding(
@@ -64,7 +82,8 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           "      REGL \n 3 days later ",
                           style: TextStyle(
-                              color: Colors.purple, fontWeight: FontWeight.bold),
+                              color: Colors.purple,
+                              fontWeight: FontWeight.bold),
                         ), //${user.userID}\n
                       )
                     ]),
