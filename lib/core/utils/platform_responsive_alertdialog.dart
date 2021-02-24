@@ -24,7 +24,8 @@ class PlatformResponsiveAlertDialog extends PlatformResponsiveWidget {
         : await showDialog<bool>(
         context: context,
         builder: (context) => this,
-        barrierDismissible: false);
+        barrierDismissible: false //user press outside cant canceled.
+    );
   }
 
   @override
@@ -46,11 +47,11 @@ class PlatformResponsiveAlertDialog extends PlatformResponsiveWidget {
   }
 
   List<Widget> _setdialogButtons(BuildContext context) {
-    final tumButonlar = <Widget>[];
+    final allButtons = <Widget>[];
 
     if (Platform.isIOS) {
       if (cancelButtonText != null) {
-        tumButonlar.add(
+        allButtons.add(
           CupertinoDialogAction(
             child: Text(cancelButtonText),
             onPressed: () {
@@ -60,7 +61,7 @@ class PlatformResponsiveAlertDialog extends PlatformResponsiveWidget {
         );
       }
 
-      tumButonlar.add(
+      allButtons.add(
         CupertinoDialogAction(
           child: Text(mainButtonText),
           onPressed: () {
@@ -70,7 +71,7 @@ class PlatformResponsiveAlertDialog extends PlatformResponsiveWidget {
       );
     } else {
       if (cancelButtonText != null) {
-        tumButonlar.add(
+        allButtons.add(
           FlatButton(
             child: Text(cancelButtonText),
             onPressed: () {
@@ -80,7 +81,7 @@ class PlatformResponsiveAlertDialog extends PlatformResponsiveWidget {
         );
       }
 
-      tumButonlar.add(
+      allButtons.add(
         FlatButton(
           child: Text("Okay"),
           onPressed: () {
@@ -90,6 +91,6 @@ class PlatformResponsiveAlertDialog extends PlatformResponsiveWidget {
       );
     }
 
-    return tumButonlar;
+    return allButtons;
   }
 }

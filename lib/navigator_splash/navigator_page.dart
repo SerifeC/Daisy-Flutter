@@ -1,5 +1,5 @@
-import 'file:///C:/Users/serife/Desktop/Daisy-Flutter/lib/features/auth/presentation/sing_in_page.dart';
-import 'file:///C:/Users/serife/Desktop/Daisy-Flutter/lib/features/auth/data/models/view_user_model.dart';
+import 'package:daisy/features/auth/data/models/view_user_model.dart';
+import 'package:daisy/features/auth/presentation/sing_in_page.dart';
 import 'package:daisy/navigator_splash/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:daisy/features/auth/domain/entities/user_model.dart';
 import 'package:daisy/features/auth/domain/repositories/auth_base.dart';
 
@@ -54,6 +56,18 @@ class FakeAutanticationService implements AuthBase{
   @override
   Future<Usr> signInWithEmailandPassword(String email, String password) {
     // TODO: implement signInWithEmailandPassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> updateUserName(String userID, String newUserName) {
+    // TODO: implement updateUserName
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String> uploadFile(String userID, String fileType, File profilPhoto) {
+    // TODO: implement uploadFile
     throw UnimplementedError();
   }
 

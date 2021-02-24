@@ -1,6 +1,5 @@
 import 'dart:ui';
-
-import 'file:///C:/Users/serife/Desktop/Daisy-Flutter/lib/navigator_splash/navigator_page.dart';
+import 'package:daisy/navigator_splash/navigator_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';

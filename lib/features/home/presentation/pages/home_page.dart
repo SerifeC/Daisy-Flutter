@@ -1,8 +1,15 @@
-import 'file:///C:/Users/serife/Desktop/Daisy-Flutter/lib/features/home/presentation/widgets/weekly_calendar.dart';
+
+import 'package:daisy/features/chat/data/models/all_user_view_model.dart';
+import 'package:daisy/features/chat/data/models/chat_view_model.dart';
+import 'package:daisy/features/chat/presentation/page/chat_page.dart';
+import 'package:daisy/features/chat/presentation/page/chat_speeches.dart';
+import 'package:daisy/features/chat/presentation/page/chat_users.dart';
 import 'package:daisy/features/home/presentation/pages/about_us.dart';
+import 'package:daisy/features/home/presentation/widgets/weekly_calendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -23,7 +30,16 @@ class _HomePageState extends State<HomePage> {
               size: 34,
             ),
             backgroundColor: Colors.white,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ChangeNotifierProvider(
+                  create: (context) => AllUserViewModel(),
+                  child:  ChatUsers(),
+                )
+                   ),
+              );
+            },
           ),
           SizedBox(
             height: 60,

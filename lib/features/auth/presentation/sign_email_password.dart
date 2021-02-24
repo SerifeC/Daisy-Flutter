@@ -2,8 +2,9 @@ import 'dart:async';
 import 'package:daisy/core/errors/exceptions.dart';
 import 'package:daisy/core/utils/platform_responsive_alertdialog.dart';
 import 'package:daisy/core/utils/social_login_button.dart';
+import 'package:daisy/features/auth/data/models/view_user_model.dart';
 import 'package:daisy/features/auth/domain/entities/user_model.dart';
-import 'file:///C:/Users/serife/Desktop/Daisy-Flutter/lib/features/auth/data/models/view_user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -18,7 +19,7 @@ class _SignInEmailandPaswordState extends State<SignInEmailandPasword> {
   String _email,_password;
   var _formType=FormType.LogIn;
   final _formKey=GlobalKey<FormState>();
-  _formSubmit(BuildContext context) async{
+  void _formSubmit() async{
     _formKey.currentState.save();
     debugPrint("e-mail"+_email);
     debugPrint("pass"+_password);
@@ -26,23 +27,22 @@ class _SignInEmailandPaswordState extends State<SignInEmailandPasword> {
     if(_formType==FormType.LogIn){
       try {
       Usr _logInUser=await _userModel.signInWithEmailandPassword(_email, _password);
-      //if(_logInUser!=null){print("user: $_logInUser");
-      } on PlatformException catch (e) {
-        PlatformResponsiveAlertDialog(
+
+      } on FirebaseAuthException catch (e) {
+        print("ERROR ${e.code}");
+         PlatformResponsiveAlertDialog(
           title: "Sign In ERROR",
           desciption: Exceptions.show(e.code),
           mainButtonText: 'Okay',
         ).show(context);
       }
 
-     // return _logInUser;
     }else{
       try {
       Usr _registerUser=await _userModel.createSignInEmailandPassword(_email, _password);
-      //if(_registerUser!=null){print("user: $_registerUser");}
-     // return _registerUser;
-      } on PlatformException catch (e) {
-        PlatformResponsiveAlertDialog(
+      } on FirebaseAuthException catch (e) {
+        print("ERORRR ${e.code}");
+        await PlatformResponsiveAlertDialog(
           title: "User Create Error",
           desciption: Exceptions.show(e.code),
           mainButtonText: 'Okay',
@@ -52,17 +52,10 @@ class _SignInEmailandPaswordState extends State<SignInEmailandPasword> {
 
   }
   void _change() {
-    if(_formType==FormType.LogIn){
-      setState(() {
-        _formType=FormType.Register;
-      });
+    setState(() {
+      _formType = _formType == FormType.LogIn ? FormType.Register : FormType.LogIn;
+    });
 
-    }else{
-      setState(() {
-        _formType=FormType.LogIn;
-      });
-
-    }
   }
 
   @override
@@ -70,19 +63,20 @@ class _SignInEmailandPaswordState extends State<SignInEmailandPasword> {
 
     String _buttonText=_formType==FormType.LogIn?" Sign In":"Register";
     String _linkText=_formType==FormType.LogIn?"Don't You Have an Account?  Register":"Do You Have an Account?  Sign In";
-    final _userModel = Provider.of<UserModel>(context,listen: false);
+    final _userModel = Provider.of<UserModel>(context);
     if(_userModel.user!=null){
-      Future.delayed(Duration(microseconds: 300));
+      Future.delayed(Duration(microseconds: 1));
       Navigator.of(context).pop();
+
       //Navigator.of(context).popUntil(ModalRoute.withName("/"));
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text("Sign In With Email and Pasword"),
+      appBar: AppBar(title: Text("Sign In / Register"),
 
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
+      body:Padding(
+        padding: const EdgeInsets.all(16.0),
         child:_userModel.state==ViewState.Idle? SingleChildScrollView(child: Form(key: _formKey,
           child: Column(children: <Widget>[
             TextFormField(
@@ -118,21 +112,20 @@ class _SignInEmailandPaswordState extends State<SignInEmailandPasword> {
               buttonText: _buttonText,
               buttonColor: Colors.purple,
               radius: 20,
-              onPressed:()=>_formSubmit(context),
+              onPressed:()=>_formSubmit(),
 
             ),
             SizedBox(height: 10,),
-
             FlatButton(onPressed: ()=>_change(),
             child: Text(_linkText),)
 
           ],),
         )):Center(child: CircularProgressIndicator(),),
       ),
-    );
-  }
+  );
 
 
 
+}
 
 }

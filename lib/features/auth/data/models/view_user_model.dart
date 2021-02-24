@@ -1,7 +1,10 @@
+import 'dart:io';
+
+import 'package:daisy/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:daisy/features/auth/domain/entities/user_model.dart';
 import 'package:daisy/features/auth/domain/repositories/auth_base.dart';
+import 'package:daisy/features/chat/domain/entities/chat_model.dart';
 import 'package:daisy/locator.dart';
-import 'file:///C:/Users/serife/Desktop/Daisy-Flutter/lib/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:flutter/material.dart';
 
 //isteklerimizi repositorye yolladığım sayfa
@@ -22,6 +25,7 @@ class UserModel with ChangeNotifier implements AuthBase{
     notifyListeners();
   }
 UserModel(){currentUser();}
+
   @override
   Future<Usr> currentUser() async{
     try{
@@ -70,6 +74,11 @@ UserModel(){currentUser();}
     } finally {
       state = ViewState.Idle;
     }
+  }
+  @override
+  Future<List<Usr>> getAllUsers() async{
+    var allUserList=await _userRepository.getAllUser();
+    return allUserList;
   }
 
   @override
@@ -155,6 +164,23 @@ UserModel(){currentUser();}
     } else
       emailErrorMessage = null;
     return result;
+  }
+
+  @override
+  Future<bool> updateUserName(String userID, String newUserName) async {
+      var result = await _userRepository.updateUserName(userID, newUserName);
+      if (result) {
+        _user.userName = newUserName;
+      }
+      return result;
+
+  }
+  Future<String> uploadFile(String userID, String fileType, File profilPhoto) async {
+    var downloadLink = await _userRepository.uploadFile(userID, fileType, profilPhoto);
+    return downloadLink;
+  }
+  Future<List<Chat>> getAllConversations(String userID) async {
+    return await _userRepository.getAllConversations(userID);
   }
 
 
